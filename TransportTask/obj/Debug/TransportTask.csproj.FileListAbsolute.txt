@@ -1,0 +1,10 @@
+D:\Programming\TransportTask\TransportTask\bin\Debug\TransportTask.exe.config
+D:\Programming\TransportTask\TransportTask\bin\Debug\TransportTask.exe
+D:\Programming\TransportTask\TransportTask\bin\Debug\TransportTask.pdb
+D:\Programming\TransportTask\TransportTask\obj\Debug\TransportTask.csprojAssemblyReference.cache
+D:\Programming\TransportTask\TransportTask\obj\Debug\TransportTask.formMain.resources
+D:\Programming\TransportTask\TransportTask\obj\Debug\TransportTask.Properties.Resources.resources
+D:\Programming\TransportTask\TransportTask\obj\Debug\TransportTask.csproj.GenerateResource.cache
+D:\Programming\TransportTask\TransportTask\obj\Debug\TransportTask.csproj.CoreCompileInputs.cache
+D:\Programming\TransportTask\TransportTask\obj\Debug\TransportTask.exe
+D:\Programming\TransportTask\TransportTask\obj\Debug\TransportTask.pdb
