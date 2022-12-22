@@ -37,7 +37,7 @@
             this.dataInputY = new System.Windows.Forms.DataGridView();
             this.dataInputX = new System.Windows.Forms.DataGridView();
             this.dataInputMain = new System.Windows.Forms.DataGridView();
-            this.button5 = new System.Windows.Forms.Button();
+            this.buttonSolve = new System.Windows.Forms.Button();
             this.buttonRemoveY = new System.Windows.Forms.Button();
             this.buttonRemoveX = new System.Windows.Forms.Button();
             this.buttonAddY = new System.Windows.Forms.Button();
@@ -59,7 +59,7 @@
             this.panelMain.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelMain.Controls.Add(this.panelSolution);
             this.panelMain.Controls.Add(this.panelInput);
-            this.panelMain.Controls.Add(this.button5);
+            this.panelMain.Controls.Add(this.buttonSolve);
             this.panelMain.Controls.Add(this.buttonRemoveY);
             this.panelMain.Controls.Add(this.buttonRemoveX);
             this.panelMain.Controls.Add(this.buttonAddY);
@@ -67,7 +67,7 @@
             this.panelMain.Controls.Add(this.panelProcess);
             this.panelMain.Location = new System.Drawing.Point(13, 13);
             this.panelMain.Name = "panelMain";
-            this.panelMain.Size = new System.Drawing.Size(1239, 656);
+            this.panelMain.Size = new System.Drawing.Size(1239, 665);
             this.panelMain.TabIndex = 0;
             // 
             // panelSolution
@@ -170,14 +170,15 @@
             this.dataInputMain.Size = new System.Drawing.Size(429, 249);
             this.dataInputMain.TabIndex = 0;
             // 
-            // button5
+            // buttonSolve
             // 
-            this.button5.Location = new System.Drawing.Point(554, 131);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(105, 34);
-            this.button5.TabIndex = 7;
-            this.button5.Text = "Вирішити";
-            this.button5.UseVisualStyleBackColor = true;
+            this.buttonSolve.Location = new System.Drawing.Point(554, 131);
+            this.buttonSolve.Name = "buttonSolve";
+            this.buttonSolve.Size = new System.Drawing.Size(105, 34);
+            this.buttonSolve.TabIndex = 7;
+            this.buttonSolve.Text = "Вирішити";
+            this.buttonSolve.UseVisualStyleBackColor = true;
+            this.buttonSolve.Click += new System.EventHandler(this.buttonSolve_Click);
             // 
             // buttonRemoveY
             // 
@@ -221,10 +222,12 @@
             // 
             // panelProcess
             // 
+            this.panelProcess.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.panelProcess.AutoScroll = true;
             this.panelProcess.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelProcess.Location = new System.Drawing.Point(4, 322);
             this.panelProcess.Name = "panelProcess";
-            this.panelProcess.Size = new System.Drawing.Size(495, 327);
+            this.panelProcess.Size = new System.Drawing.Size(1228, 336);
             this.panelProcess.TabIndex = 2;
             // 
             // formMain
@@ -255,7 +258,7 @@
         private System.Windows.Forms.DataGridView dataInputMain;
         private System.Windows.Forms.Button buttonAddY;
         private System.Windows.Forms.Button buttonAddX;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button buttonSolve;
         private System.Windows.Forms.Button buttonRemoveY;
         private System.Windows.Forms.Button buttonRemoveX;
         private System.Windows.Forms.Panel panelInput;
