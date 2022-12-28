@@ -29,11 +29,18 @@
         private void InitializeComponent()
         {
             this.panelMain = new System.Windows.Forms.Panel();
+            this.labelText_Cost = new System.Windows.Forms.Label();
+            this.buttonClear = new System.Windows.Forms.Button();
+            this.labelText_CostLabel = new System.Windows.Forms.Label();
             this.panelSolution = new System.Windows.Forms.Panel();
+            this.labelText_OutY = new System.Windows.Forms.Label();
+            this.labelText_OutX = new System.Windows.Forms.Label();
             this.dataFinalY = new System.Windows.Forms.DataGridView();
             this.dataFinalX = new System.Windows.Forms.DataGridView();
             this.dataFinal = new System.Windows.Forms.DataGridView();
             this.panelInput = new System.Windows.Forms.Panel();
+            this.labelText_InY = new System.Windows.Forms.Label();
+            this.labelText_InX = new System.Windows.Forms.Label();
             this.dataInputY = new System.Windows.Forms.DataGridView();
             this.dataInputX = new System.Windows.Forms.DataGridView();
             this.dataInputMain = new System.Windows.Forms.DataGridView();
@@ -42,13 +49,8 @@
             this.buttonRemoveX = new System.Windows.Forms.Button();
             this.buttonAddY = new System.Windows.Forms.Button();
             this.buttonAddX = new System.Windows.Forms.Button();
-            this.labelText_CostLabel = new System.Windows.Forms.Label();
-            this.buttonClear = new System.Windows.Forms.Button();
-            this.labelText_Cost = new System.Windows.Forms.Label();
-            this.labelText_InX = new System.Windows.Forms.Label();
-            this.labelText_InY = new System.Windows.Forms.Label();
-            this.labelText_OutX = new System.Windows.Forms.Label();
-            this.labelText_OutY = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.panelMain.SuspendLayout();
             this.panelSolution.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataFinalY)).BeginInit();
@@ -78,9 +80,42 @@
             this.panelMain.Size = new System.Drawing.Size(1239, 363);
             this.panelMain.TabIndex = 0;
             // 
+            // labelText_Cost
+            // 
+            this.labelText_Cost.AutoSize = true;
+            this.labelText_Cost.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.labelText_Cost.Location = new System.Drawing.Point(820, 344);
+            this.labelText_Cost.Name = "labelText_Cost";
+            this.labelText_Cost.Size = new System.Drawing.Size(12, 15);
+            this.labelText_Cost.TabIndex = 12;
+            this.labelText_Cost.Text = " ";
+            this.labelText_Cost.Visible = false;
+            // 
+            // buttonClear
+            // 
+            this.buttonClear.Location = new System.Drawing.Point(554, 195);
+            this.buttonClear.Name = "buttonClear";
+            this.buttonClear.Size = new System.Drawing.Size(105, 34);
+            this.buttonClear.TabIndex = 11;
+            this.buttonClear.Text = "Очистити таблиці";
+            this.buttonClear.UseVisualStyleBackColor = true;
+            this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
+            // 
+            // labelText_CostLabel
+            // 
+            this.labelText_CostLabel.AutoSize = true;
+            this.labelText_CostLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.labelText_CostLabel.Location = new System.Drawing.Point(718, 344);
+            this.labelText_CostLabel.Name = "labelText_CostLabel";
+            this.labelText_CostLabel.Size = new System.Drawing.Size(97, 15);
+            this.labelText_CostLabel.TabIndex = 10;
+            this.labelText_CostLabel.Text = "Ціна перевезень:";
+            this.labelText_CostLabel.Visible = false;
+            // 
             // panelSolution
             // 
             this.panelSolution.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelSolution.Controls.Add(this.label2);
             this.panelSolution.Controls.Add(this.labelText_OutY);
             this.panelSolution.Controls.Add(this.labelText_OutX);
             this.panelSolution.Controls.Add(this.dataFinalY);
@@ -90,6 +125,24 @@
             this.panelSolution.Name = "panelSolution";
             this.panelSolution.Size = new System.Drawing.Size(521, 332);
             this.panelSolution.TabIndex = 9;
+            // 
+            // labelText_OutY
+            // 
+            this.labelText_OutY.AutoSize = true;
+            this.labelText_OutY.Location = new System.Drawing.Point(3, 60);
+            this.labelText_OutY.Name = "labelText_OutY";
+            this.labelText_OutY.Size = new System.Drawing.Size(44, 13);
+            this.labelText_OutY.TabIndex = 5;
+            this.labelText_OutY.Text = "Запаси";
+            // 
+            // labelText_OutX
+            // 
+            this.labelText_OutX.AutoSize = true;
+            this.labelText_OutX.Location = new System.Drawing.Point(64, 7);
+            this.labelText_OutX.Name = "labelText_OutX";
+            this.labelText_OutX.Size = new System.Drawing.Size(50, 13);
+            this.labelText_OutX.TabIndex = 5;
+            this.labelText_OutX.Text = "Потреби";
             // 
             // dataFinalY
             // 
@@ -133,6 +186,7 @@
             // panelInput
             // 
             this.panelInput.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelInput.Controls.Add(this.label1);
             this.panelInput.Controls.Add(this.labelText_InY);
             this.panelInput.Controls.Add(this.labelText_InX);
             this.panelInput.Controls.Add(this.dataInputY);
@@ -142,6 +196,24 @@
             this.panelInput.Name = "panelInput";
             this.panelInput.Size = new System.Drawing.Size(495, 337);
             this.panelInput.TabIndex = 8;
+            // 
+            // labelText_InY
+            // 
+            this.labelText_InY.AutoSize = true;
+            this.labelText_InY.Location = new System.Drawing.Point(3, 60);
+            this.labelText_InY.Name = "labelText_InY";
+            this.labelText_InY.Size = new System.Drawing.Size(44, 13);
+            this.labelText_InY.TabIndex = 4;
+            this.labelText_InY.Text = "Запаси";
+            // 
+            // labelText_InX
+            // 
+            this.labelText_InX.AutoSize = true;
+            this.labelText_InX.Location = new System.Drawing.Point(64, 7);
+            this.labelText_InX.Name = "labelText_InX";
+            this.labelText_InX.Size = new System.Drawing.Size(50, 13);
+            this.labelText_InX.TabIndex = 3;
+            this.labelText_InX.Text = "Потреби";
             // 
             // dataInputY
             // 
@@ -232,73 +304,25 @@
             this.buttonAddX.UseVisualStyleBackColor = true;
             this.buttonAddX.Click += new System.EventHandler(this.buttonAddX_Click);
             // 
-            // labelText_CostLabel
+            // label1
             // 
-            this.labelText_CostLabel.AutoSize = true;
-            this.labelText_CostLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.labelText_CostLabel.Location = new System.Drawing.Point(718, 344);
-            this.labelText_CostLabel.Name = "labelText_CostLabel";
-            this.labelText_CostLabel.Size = new System.Drawing.Size(97, 15);
-            this.labelText_CostLabel.TabIndex = 10;
-            this.labelText_CostLabel.Text = "Ціна перевезень:";
-            this.labelText_CostLabel.Visible = false;
+            this.label1.AutoSize = true;
+            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(58, 15);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Введення";
             // 
-            // buttonClear
+            // label2
             // 
-            this.buttonClear.Location = new System.Drawing.Point(554, 195);
-            this.buttonClear.Name = "buttonClear";
-            this.buttonClear.Size = new System.Drawing.Size(105, 34);
-            this.buttonClear.TabIndex = 11;
-            this.buttonClear.Text = "Очистити таблиці";
-            this.buttonClear.UseVisualStyleBackColor = true;
-            this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
-            // 
-            // labelText_Cost
-            // 
-            this.labelText_Cost.AutoSize = true;
-            this.labelText_Cost.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.labelText_Cost.Location = new System.Drawing.Point(820, 344);
-            this.labelText_Cost.Name = "labelText_Cost";
-            this.labelText_Cost.Size = new System.Drawing.Size(12, 15);
-            this.labelText_Cost.TabIndex = 12;
-            this.labelText_Cost.Text = " ";
-            this.labelText_Cost.Visible = false;
-            // 
-            // labelText_InX
-            // 
-            this.labelText_InX.AutoSize = true;
-            this.labelText_InX.Location = new System.Drawing.Point(56, 7);
-            this.labelText_InX.Name = "labelText_InX";
-            this.labelText_InX.Size = new System.Drawing.Size(50, 13);
-            this.labelText_InX.TabIndex = 3;
-            this.labelText_InX.Text = "Потреби";
-            // 
-            // labelText_InY
-            // 
-            this.labelText_InY.AutoSize = true;
-            this.labelText_InY.Location = new System.Drawing.Point(3, 60);
-            this.labelText_InY.Name = "labelText_InY";
-            this.labelText_InY.Size = new System.Drawing.Size(44, 13);
-            this.labelText_InY.TabIndex = 4;
-            this.labelText_InY.Text = "Запаси";
-            // 
-            // labelText_OutX
-            // 
-            this.labelText_OutX.AutoSize = true;
-            this.labelText_OutX.Location = new System.Drawing.Point(57, 7);
-            this.labelText_OutX.Name = "labelText_OutX";
-            this.labelText_OutX.Size = new System.Drawing.Size(50, 13);
-            this.labelText_OutX.TabIndex = 5;
-            this.labelText_OutX.Text = "Потреби";
-            // 
-            // labelText_OutY
-            // 
-            this.labelText_OutY.AutoSize = true;
-            this.labelText_OutY.Location = new System.Drawing.Point(3, 60);
-            this.labelText_OutY.Name = "labelText_OutY";
-            this.labelText_OutY.Size = new System.Drawing.Size(44, 13);
-            this.labelText_OutY.TabIndex = 5;
-            this.labelText_OutY.Text = "Запаси";
+            this.label2.AutoSize = true;
+            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label2.Location = new System.Drawing.Point(0, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(64, 15);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Виведення";
             // 
             // formMain
             // 
@@ -347,6 +371,8 @@
         private System.Windows.Forms.Label labelText_OutX;
         private System.Windows.Forms.Label labelText_InY;
         private System.Windows.Forms.Label labelText_InX;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }
 

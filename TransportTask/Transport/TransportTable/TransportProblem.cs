@@ -33,53 +33,7 @@ namespace TransportTask.Transport.TransportTable
             this.mA = nA; this.mB = nB; this.mC = nC;
             this.ASize = nA.Length; this.BSize = nB.Length;
         }
-        public TransportProblem(int _Asize, int _Bsize, string sA, string sB, string[] sC)
-        {
-            ASize = _Asize; BSize = _Bsize;
-            float x = 0;
-            string[] StrArr = sA.Split(' ');
-            if (StrArr.Length != ASize)
-                throw new InvalidInpFormat("Розміри масиву А не відповідають вказаним");
-            mA = new float[ASize];
-            for (int i = 0; i < mA.Length; i++) if (float.TryParse(StrArr[i], out x)) mA[i] = x;
-
-            StrArr = sB.Split(' ');
-            if (StrArr.Length != BSize)
-                throw new InvalidInpFormat("Розміри масиву В не відповідають вказаним");
-            mB = new float[BSize];
-            for (int i = 0; i < mB.Length; i++) if (float.TryParse(StrArr[i], out x)) mB[i] = x;
-
-            float sumA = 0;
-            Array.ForEach(mA, delegate (float f) { sumA += f; });
-            float sumB = 0;
-            Array.ForEach(mB, delegate (float f) { sumB += f; });
-            float dif = sumA - sumB;
-            if (dif > 0)
-            {
-                float[] bufArr = mB;
-                mB = new float[bufArr.Length + 1];
-                bufArr.CopyTo(mB, 0);
-                mB[mB.Length - 1] = Math.Abs(dif);
-                BSize++;
-            }
-            else if (dif < 0)
-            {
-                float[] bufArr = mA;
-                mA = new float[bufArr.Length + 1];
-                bufArr.CopyTo(mA, 0);
-                mA[mA.Length - 1] = Math.Abs(dif);
-                ASize++;
-            }
-
-            mC = new float[ASize, BSize];
-            for (int j = 0; j < sC.Length; j++)
-            {
-                StrArr = sC[j].Split(' ');
-                if (StrArr.Length != _Bsize)
-                    throw new InvalidInpFormat("Довжина одного із рядків вхідного файлу не відповідає довжині масиву В");
-                for (int i = 0; i < _Bsize; i++) if (float.TryParse(StrArr[i], out x)) mC[j, i] = x;
-            }
-        }
+        
 
         bool isEmpty(float[] arr)
         {
@@ -94,24 +48,6 @@ namespace TransportTask.Transport.TransportTable
                     if (outArr[i, j] == 0) outArr[i, j] = float.NaN;
         }
 
-        float findMin(float[,] Arr, bool[,] pr, out int indi, out int indj)
-        {
-            indi = -1; indj = -1;
-            float min = float.MaxValue;
-            for (int i = 0; i < ASize; i++)
-                for (int j = 0; j < BSize; j++)
-                    if ((pr[i, j]) && (Arr[i, j] < min))
-                    {
-                        min = Arr[i, j];
-                        indi = i; indj = j;
-                    }
-            return min;
-        }
-
-        public float[,] VolgelsMethod()
-        {
-            return null;
-        }
 
         // Метод північно-західного кута
         public float[,] NordWest()
@@ -200,79 +136,6 @@ namespace TransportTask.Transport.TransportTable
 
         }
 
-        // Метод мінімального елемента
-        public float[,] MinEl()
-        {
-            float[] Ahelp = this.mA;
-            float[] Bhelp = this.mB;
-            int i = 0;
-            int j = 0;
-            float min = float.MaxValue;
-            float[,] outArr = new float[this.ASize, this.BSize];
-            bool[,] pArr = new bool[this.ASize, this.BSize];
-            for (i = 0; i < this.ASize; i++)
-            {
-                for (j = 0; j < this.BSize; j++)
-                {
-                    pArr[i, j] = true;
-                }
-            }
-            i = 0;
-            j = 0;
-            int k;
-            int count = 0;
-            while (!this.isEmpty(Ahelp) || !this.isEmpty(Bhelp))
-            {
-                min = this.findMin(this.mC, pArr, out i, out j);
-                float Dif = Math.Min(Ahelp[i], Bhelp[j]);
-                outArr[i, j] += Dif; count++;
-                Ahelp[i] -= Dif;
-                Bhelp[j] -= Dif;
-                if (Ahelp[i] == 0f)
-                {
-                    k = 0;
-                    while (k < this.BSize)
-                    {
-                        pArr[i, k] = false;
-                        k++;
-                    }
-                }
-                if (Bhelp[j] == 0f)
-                {
-                    for (k = 0; k < this.ASize; k++)
-                    {
-                        pArr[k, j] = false;
-                    }
-                }
-            }
-            this.NanToEmpty(outArr);
-
-            int difference = (ASize + BSize - 1) - count;
-            for (int l = 0; l < difference; l++)
-            {
-                Allowed = new Point[count + 1];
-                k = 0;
-                for (i = 0; i < ASize; i++)
-                    for (j = 0; j < BSize; j++)
-                        if (outArr[i, j] == outArr[i, j])
-                        {
-                            Allowed[k] = new Point(i, j);
-                            k++;
-                        }
-                Boolean p = true;
-                Point Nl = new Point(0, 0);
-                for (i = 0; (i < ASize) && p; i++)
-                    for (j = 0; (j < BSize) && p; j++)
-                    {
-                        Nl = Allowed[9] = new Point(i, j);
-                        FindWay fw = new FindWay(i, j, true, Allowed, new Point(i, j), null);
-                        p = fw.BuildTree();
-                    }
-                if (!p) outArr[Nl.X, Nl.Y] = 0;
-            }
-
-            return outArr;
-        }
 
         private void FindUV(float[] U, float[] V, float[,] HelpMatr)
         {

@@ -145,12 +145,8 @@ namespace TransportTask
                 {
                     if (dataInputX.Columns.Count > dataInputY.Rows.Count)
                     {
-                        buttonAddY_Click(sender, e); //@TODO ADD 0 AND X
-                        /*dataFinalY.Rows[dataFinalY.Rows.Count - 1].Cells[0].Value = ;
-                        for (int i = 0; i < dataInputMain.Rows.Count; i++)
-                        {
-                            dataInputMain.Rows[dataFinalY.Rows.Count - 1].Cells[i].Value = 0;
-                        }*/
+                        buttonAddY_Click(sender, e);
+
                     }
                     else if (dataInputY.Rows.Count > dataInputX.Columns.Count)
                     {
