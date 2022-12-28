@@ -29,7 +29,7 @@ namespace TransportTask.Transport.TransportTable
         public TransportProblem(float[] nA, float[] nB, float[,] nC)
         {
             if ((nA.Length != nC.GetLength(0)) || (nB.Length != nC.GetLength(1)))
-                throw new InvalidInpFormat("Размеры массива затрат не соответствуют размерам массивов поставщиков и складов");
+                throw new InvalidInpFormat("Розміри масиву витрат не відповідають розмірам масиву потреб та запасів");
             this.mA = nA; this.mB = nB; this.mC = nC;
             this.ASize = nA.Length; this.BSize = nB.Length;
         }
@@ -39,13 +39,13 @@ namespace TransportTask.Transport.TransportTable
             float x = 0;
             string[] StrArr = sA.Split(' ');
             if (StrArr.Length != ASize)
-                throw new InvalidInpFormat("Размеры массива А не соответствуют заявленным");
+                throw new InvalidInpFormat("Розміри масиву А не відповідають вказаним");
             mA = new float[ASize];
             for (int i = 0; i < mA.Length; i++) if (float.TryParse(StrArr[i], out x)) mA[i] = x;
 
             StrArr = sB.Split(' ');
             if (StrArr.Length != BSize)
-                throw new InvalidInpFormat("Размеры массива B не соответствуют заявленным");
+                throw new InvalidInpFormat("Розміри масиву В не відповідають вказаним");
             mB = new float[BSize];
             for (int i = 0; i < mB.Length; i++) if (float.TryParse(StrArr[i], out x)) mB[i] = x;
 
@@ -76,7 +76,7 @@ namespace TransportTask.Transport.TransportTable
             {
                 StrArr = sC[j].Split(' ');
                 if (StrArr.Length != _Bsize)
-                    throw new InvalidInpFormat("Длина одной из строк входного файла не соответствует длине массива В");
+                    throw new InvalidInpFormat("Довжина одного із рядків вхідного файлу не відповідає довжині масиву В");
                 for (int i = 0; i < _Bsize; i++) if (float.TryParse(StrArr[i], out x)) mC[j, i] = x;
             }
         }
