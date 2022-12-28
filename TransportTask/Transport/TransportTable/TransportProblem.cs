@@ -18,18 +18,14 @@ namespace TransportTask.Transport.TransportTable
                 return Message;
             }
         }
-        // склады
+
         public float[] mA;
-        // потребители
         public float[] mB;
-        // Издержки
         public float[,] mC;
         public int ASize;
         public int BSize;
-        // Тут будем хранить цикл
         private Point[] cycle;
 
-        // Конструкторы
         public TransportProblem(float[] nA, float[] nB, float[,] nC)
         {
             if ((nA.Length != nC.GetLength(0)) || (nB.Length != nC.GetLength(1)))
@@ -84,7 +80,7 @@ namespace TransportTask.Transport.TransportTable
                 for (int i = 0; i < _Bsize; i++) if (float.TryParse(StrArr[i], out x)) mC[j, i] = x;
             }
         }
-        // Строим опорные планы тут
+
         bool isEmpty(float[] arr)
         {
             return Array.TrueForAll(arr, delegate (float x) { return x == 0; });
@@ -111,13 +107,13 @@ namespace TransportTask.Transport.TransportTable
                     }
             return min;
         }
-        //
+
         public float[,] VolgelsMethod()
         {
             return null;
         }
 
-        // Метод северо-западного угла
+        // Метод північно-західного кута
         public float[,] NordWest()
         {
             float[] Ahelp = mA;
@@ -125,7 +121,6 @@ namespace TransportTask.Transport.TransportTable
             int i = 0, j = 0;
             float[,] outArr = new float[ASize, BSize];
             NanToEmpty(outArr);
-            //МЯСО
             while (!(isEmpty(Ahelp) && isEmpty(Bhelp)))
             {
                 float Dif = Math.Min(Ahelp[i], Bhelp[j]);
@@ -145,8 +140,6 @@ namespace TransportTask.Transport.TransportTable
             FindWay[] Childrens;
             Point[] mAllowed;
             Point Begining;
-            //true - вниз/вверх
-            //false - влево/вправо
             bool flag;
             public FindWay(int x, int y, bool _flag, Point[] _mAllowed, Point _Beg, FindWay _Father)
             {
@@ -179,7 +172,6 @@ namespace TransportTask.Transport.TransportTable
 
                 FindWay fwu = this;
                 Childrens = new FindWay[Count];
-                //Point[] ss = new Point[mAllowed.Length];
                 int k = 0;
                 for (int i = 0; i < Count; i++)
                 {
@@ -208,8 +200,7 @@ namespace TransportTask.Transport.TransportTable
 
         }
 
-        // Метод минимального элемента
-        //public float[,] MinEl()
+        // Метод мінімального елемента
         public float[,] MinEl()
         {
             float[] Ahelp = this.mA;
@@ -256,11 +247,9 @@ namespace TransportTask.Transport.TransportTable
             }
             this.NanToEmpty(outArr);
 
-            // Нуль-загрузка
             int difference = (ASize + BSize - 1) - count;
             for (int l = 0; l < difference; l++)
             {
-                //выбираем непустые
                 Allowed = new Point[count + 1];
                 k = 0;
                 for (i = 0; i < ASize; i++)
@@ -270,7 +259,6 @@ namespace TransportTask.Transport.TransportTable
                             Allowed[k] = new Point(i, j);
                             k++;
                         }
-                // ищем куда загрузить
                 Boolean p = true;
                 Point Nl = new Point(0, 0);
                 for (i = 0; (i < ASize) && p; i++)
@@ -286,23 +274,13 @@ namespace TransportTask.Transport.TransportTable
             return outArr;
         }
 
-        // Оптимизация методом потенциалов
-        // вспомогательные функции
-        // функция заполняет вспомогательные массивы U и V
-        // пока работает...
         private void FindUV(float[] U, float[] V, float[,] HelpMatr)
         {
-            //для проверки вычислена ли Ui Vi будем использовать массив boolean'ов
-            //даже 2 массива. в одном признак того вычислена ли соответствующий потенциал
-            //во втором прошлись ли мы по строке/строчке этого потенциала
-            //алгоритм позволит за конечное число итераций вычислить все потенциалы. ура.
             bool[] U1 = new bool[ASize];
             bool[] U2 = new bool[ASize];
             bool[] V1 = new bool[BSize];
             bool[] V2 = new bool[BSize];
-            //V[BSize - 1] = 0;
-            //V1[BSize - 1] = true;
-            // пока все элементы массивов V1 и U1 не будут равны true
+          
             while (!(AllTrue(V1) && AllTrue(U1)))
             {
                 int i = -1;
@@ -369,7 +347,6 @@ namespace TransportTask.Transport.TransportTable
             return Array.TrueForAll(arr, delegate (bool x) { return x; });
         }
 
-        // дозаполняет матрицу S оценками
         private float[,] MakeSMatr(float[,] M, float[] U, float[] V)
         {
 
@@ -384,7 +361,7 @@ namespace TransportTask.Transport.TransportTable
             return HM;
         }
 
-        private Point[] Allowed;// хранит координаты клеток, в которых есть груз
+        private Point[] Allowed;
 
         public int[] arra = new int[5];
 
@@ -397,7 +374,6 @@ namespace TransportTask.Transport.TransportTable
             return Way;
         }
 
-        // находит плохой цикл и крутит его
         private void Roll(float[,] m, float[,] sm)
         {
             Point minInd = new Point();
@@ -413,7 +389,6 @@ namespace TransportTask.Transport.TransportTable
                         Allowed[k].Y = j;
                         k++;
                     }
-                    // заодно ищем макс по модулю отр элемент
                     if (sm[i, j] < min)
                     {
                         min = sm[i, j];
@@ -421,7 +396,6 @@ namespace TransportTask.Transport.TransportTable
                         minInd.Y = j;
                     }
                 }
-            // Ищем цикл
             Allowed[Allowed.Length - 1] = minInd;
             Point[] Cycle = GetCycle(minInd.X, minInd.Y);
             float[] Cycles = new float[Cycle.Length];
@@ -429,12 +403,6 @@ namespace TransportTask.Transport.TransportTable
             for (int i = 0; i < bCycles.Length; i++)
                 bCycles[i] = i == bCycles.Length - 1 ? false : true;
             min = float.MaxValue;
-            /* проблема в следующем:
-             * цикл мы находим правильно
-             * а вот посчитать правильно не можем
-             * ниже поиск минимального элемента
-             */
-            // поиск минимального
             for (int i = 0; i < Cycle.Length; i++)
             {
                 Cycles[i] = m[Cycle[i].X, Cycle[i].Y];
@@ -446,7 +414,6 @@ namespace TransportTask.Transport.TransportTable
                 if (Cycles[i] != Cycles[i]) Cycles[i] = 0;
             }
             int point1 = 0;
-            // вычитание-прибавление
             for (int i = 0; i < Cycle.Length; i++)
             {
                 if (i % 2 == 0)
@@ -464,11 +431,8 @@ namespace TransportTask.Transport.TransportTable
             m[minInd.X, minInd.Y] = float.NaN;
         }
 
-        // сама оптимизация
         public float[,] PotenMeth(float[,] SupArr)
         {
-            // расчитываем Ui и Vi
-            //подготовка
             int i = 0, j = 0;
             float[,] HelpMatr = new float[ASize, BSize];
             for (i = 0; i < ASize; i++)
@@ -476,12 +440,10 @@ namespace TransportTask.Transport.TransportTable
                     if (SupArr[i, j] == SupArr[i, j]) HelpMatr[i, j] = mC[i, j];
                     else HelpMatr[i, j] = float.NaN;
 
-            //расчёт
             float[] U = new float[ASize];
             float[] V = new float[BSize];
             FindUV(U, V, HelpMatr);
             float[,] SMatr = MakeSMatr(HelpMatr, U, V);
-            //пока все потенциалы не станут положительнымми, будем снова и снова считать
             while (!AllPositive(SMatr))
             {
                 Roll(SupArr, SMatr);

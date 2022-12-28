@@ -154,18 +154,19 @@ namespace TransportTask
                     }
                     else if (dataInputY.Rows.Count > dataInputX.Columns.Count)
                     {
-                        buttonAddX_Click(sender, e); //@TODO ADD 0 AND Y
-                        
-                        /*for (int i = 0; i < dataInputMain.Rows.Count; i++)
-                        {
-                            dataInputMain.Rows[i].Cells[dataFinalY.Columns.Count - 1].Value = 0;
-                        }*/
+                        buttonAddX_Click(sender, e);
                     }
                 }
                 MessageBox.Show("Було надано задачу откритого типу, таблицю було преобразовано для подальшого вирішення.\nЗаповніть нові рядки.");
                 return;
             }
-            DataProcessor.northWestAngleMethodSollution(dataInput, panelProcess, dataOutput);
+            else if (!(DataProcessor.checkForEquality(dataInputX, dataInputY))){
+                MessageBox.Show("Сума значень потреб та запасів не рівні!\nЗаповніть таблиці потреб та запасів так, щоб задача була збалансована.");
+                return;
+            }
+            labelText_Cost.Visible = true;
+            labelText_CostLabel.Visible = true;
+            DataProcessor.northWestAngleMethodSollution(dataInput, dataOutput, labelText_Cost);
 
         }
         private void dataClearSelection()
@@ -176,6 +177,18 @@ namespace TransportTask
             dataFinal.ClearSelection();
             dataFinalX.ClearSelection();
             dataFinalY.ClearSelection();
+        }
+
+        private void buttonClear_Click(object sender, EventArgs e)
+        {
+            dataInputMain.Columns.Clear();
+            dataInputX.Columns.Clear();
+            dataInputY.Columns.Clear();
+            dataFinal.Columns.Clear();
+            dataFinalX.Columns.Clear();
+            dataFinalY.Columns.Clear();
+            labelText_Cost.Visible = false;
+            labelText_CostLabel.Visible = false;
         }
     }
 }
